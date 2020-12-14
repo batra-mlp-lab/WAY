@@ -53,5 +53,10 @@ unzip way_splits.zip
 rm way_splits.zip
 ```
 
+### Download Pretrained Models
+
 ## Usage
+
+For testing use `test.sh` with the downloaded pretrained model. 
+For training use `train.sh` and edit the parser arguments as necessary
 
