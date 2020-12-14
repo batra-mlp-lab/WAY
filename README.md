@@ -28,23 +28,29 @@ You will also need to first install the WAY dataset described [here (https://mee
 
 | Dataset | Extract path | Size |
 |-------------- |---------------------------- |------- |
-| [R2R_VLNCE_v1-1.zip](https://drive.google.com/file/d/1r6tsahJYctvWefcyFKfsQXUA2Khj4qvR/view) | `data/datasets/R2R_VLNCE_v1-1` | 3 MB |
-| [R2R_VLNCE_v1-1_preprocessed.zip](https://drive.google.com/file/d/1jNEDBiv7SnsBpXLLt7nstYpS_mg71KTV/view) | `data/datasets/R2R_VLNCE_v1-1_preprocessed` | 344 MB |
+| [way_splits.zip](https://drive.google.com/file/d/1bMvfiiCetHNlPsVQq9M5lZlcz3K9cU2J/view) | `data/way_splits/` | 2 MB |
+| [floorplans.zip](https://drive.google.com/file/d/1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h/view) | `data/floorplans/` | 103 MB |
+| [word_embeddings.zip](https://drive.google.com/file/d/1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh/view) | `data/word_embeddings/` | 13 MB |
 
 Downloading the dataset:
 ```bash
 python -m pip install gdown
-cd data/datasets
+cd data
 
-# R2R_VLNCE_v1-1
-gdown https://drive.google.com/uc?id=1r6tsahJYctvWefcyFKfsQXUA2Khj4qvR
-unzip R2R_VLNCE_v1-1.zip
-rm R2R_VLNCE_v1-1.zip
+# Word Embddings
+gdown 'https://drive.google.com/uc?id=1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh'
+unzip word_embeddings.zip
+rm word_embeddings.zip
 
-# R2R_VLNCE_v1-1_preprocessed
-gdown https://drive.google.com/uc?id=1jNEDBiv7SnsBpXLLt7nstYpS_mg71KTV
-unzip R2R_VLNCE_v1-1_preprocessed.zip
-rm R2R_VLNCE_v1-1_preprocessed.zip
+# Floorplans
+gdown 'https://drive.google.com/uc?id=1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h'
+unzip floorplans.zip
+rm floorplans.zip
+
+# Floorplans
+gdown 'https://drive.google.com/uc?id=1bMvfiiCetHNlPsVQq9M5lZlcz3K9cU2J'
+unzip way_splits.zip
+rm way_splits.zip
 ```
 
 ## Usage
