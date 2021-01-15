@@ -27,7 +27,7 @@ python -m pip install -r requirements.txt
 
 
 ### Dataset Download
-You will also need to first install the WAY dataset described [here (https://meerahahn.github.io/way/data)] into the data folder.
+You will need to download the WAY dataset described [here (https://meerahahn.github.io/way/data)] into the data folder.
 
 | Dataset | Extract path | Size |
 |-------------- |---------------------------- |------- |
@@ -57,9 +57,14 @@ rm way_splits.zip
 ```
 
 ### Download Pretrained Models
+We provide a trained lingUnet-skip model described in the paper which you can download here
 
 ## Usage
+The `lingUnet/run.py` script is how training and evaluation is done for all model configurations.
 
-For testing use `test.sh` with the downloaded pretrained model. 
-For training use `train.sh` and edit the parser arguments as necessary
+For testing use `lingUnet/run_scripts/eval.sh` 
+For training use `lingUnet/run_scripts/base.sh`  
 
+Before running these scripts you will need to change the `BASEDIR`, `SAVEDIR`, `DATADIR` paths in both of the scripts.
+
+Additionally use these files to change the parameters of the model which are set to default values in `lingUnet/cfg.py`
