@@ -61,7 +61,7 @@ We provide a trained lingUnet-skip model described in the paper which you can do
 
 ## Usage
 
-###LingUNet-Skip Model
+### LingUNet-Skip Model
 
 The `lingUnet/run.py` script is how training and evaluation is done for all model configurations.
 
@@ -93,7 +93,7 @@ data_aug
 No residual layer
 All the rest should be easy to find and change in the cfg.py file
 
-###Baseline Models
+### Baseline Models
 We presented 4 non-learning baselines in the paper, random pixel, random viewpoint, center pixel and a heuristic sliding window approach
 
 To run the heuristic sliding window approach go into `Baselines` run
