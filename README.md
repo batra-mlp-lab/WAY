@@ -1,5 +1,4 @@
-# WAY
-Where are you? Dataset. Code for the Localization from Embodied Dialog Task using a LingUNet-Skip Model
+# Where Are You? (WAY) Localization from Embodied Dialog
 
 This repository is the official implementation of [Where Are You? Localizaiton from Embodied Dialog]
 https://arxiv.org/abs/2011.08277
