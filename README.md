@@ -60,6 +60,9 @@ rm way_splits.zip
 We provide a trained lingUnet-skip model described in the paper which you can download here
 
 ## Usage
+
+###LingUNet-Skip Model
+
 The `lingUnet/run.py` script is how training and evaluation is done for all model configurations.
 
 For testing use `lingUnet/run_scripts/eval.sh` 
@@ -68,3 +71,35 @@ For training use `lingUnet/run_scripts/base.sh`
 Before running these scripts you will need to change the `BASEDIR`, `SAVEDIR`, `DATADIR` paths in both of the scripts.
 
 Additionally use these files to change the parameters of the model which are set to default values in `lingUnet/cfg.py`
+
+#### Ablation Parameters
+Ablations Experiments and Parameters for Running the Model
+* Language Changes
+Argument language_change
+Options:
+shuffle
+locator_only
+observer_only
+first_half
+second_half
+none 
+ 
+* Removing Inputs 
+blind_lang
+blind_vis
+data_aug
+
+* Changing Architecture
+No residual layer
+All the rest should be easy to find and change in the cfg.py file
+
+###Baseline Models
+We presented 4 non-learning baselines in the paper, random pixel, random viewpoint, center pixel and a heuristic sliding window approach
+
+To run the heuristic sliding window approach go into `Baselines` run
+`python run_sliding_window.py`
+
+To run random and center baselines go into `Baselines` run
+`python paper_baselines.py`
+
+
