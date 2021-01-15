@@ -8,6 +8,10 @@ The Where Are You? (WAY) dataset contains ~6k dialogs in which two humans -- an 
 
 This repository contains the implemenation of baseline models for the Localization from Embodied Dialog (LED) task. The main model we focus on is a LingUNet model with residual connections.
 
+<p align="center">
+  <img width="775" height="360" src="./data/examples/led_task_figure.jpg" alt="LED task figure">
+</p>
+
 ## Setup
 
 This project is developed with Python 3.6 and PyTorch
