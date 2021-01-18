@@ -115,24 +115,16 @@ In the paper we ran the model with euclidean distance to obtain these results pl
 #### Ablation Parameters
 In order to run the ablations experiments presented in the paper or other parameters for running the model you can change the arguments in `/lingUnet/run_scripts/{}.sh` or in `/lingUnet/run_scripts/cfg.py`
 
-
-* To make Language Changes change the parameter `language_change`
+* To make Language Changes change the parameter: `language_change`
 Options:
-`shuffle
+```shuffle
 locator_only
 observer_only
 first_half
 second_half
-none `
- 
-* Removing Inputs 
-blind_lang
-blind_vis
-data_aug
-
-* Changing Architecture
-No residual layer
-All the rest should be easy to find and change in the cfg.py file
+none
+```
+* To zero out the inputs or use data augmentation set the boolean parameters: `blind_lang`, `blind_vis` and `data_aug`
 
 ### Baseline Models
 We presented 4 non-learning baselines in the paper, random pixel, random viewpoint, center pixel and a heuristic sliding window approach
