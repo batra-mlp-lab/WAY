@@ -76,16 +76,21 @@ Results from LingUNet with geodesic distance and snap to scene graph:
 
 ### LingUNet-Skip Model
 * val-seen 
+
 |Model |LE|0m|5m|10m|
 |------|--|--|--|---|
 | LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
-| Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |                                                                                               
+| Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |    
+
 * val-unseen 
+
 |Model |LE|0m|5m|10m|
 |------|--|--|--|---|
 | LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
 | Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |  
+
 * test
+
 |Model |LE|0m|5m|10m|
 |------|--|--|--|---|
 | LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
