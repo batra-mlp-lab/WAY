@@ -72,6 +72,9 @@ Before running these scripts you will need to change the `BASEDIR`, `SAVEDIR`, `
 
 Additionally use these files to change the parameters of the model which are set to default values in `lingUnet/cfg.py`
 
+#### Evaluation
+
+
 #### Ablation Parameters
 Ablations Experiments and Parameters for Running the Model
 * Language Changes
@@ -102,4 +105,24 @@ To run the heuristic sliding window approach go into `Baselines` run
 To run random and center baselines go into `Baselines` run
 `python paper_baselines.py`
 
+## Contributing
 
+If you find something wrong or have a question, feel free to open an issue. If you would like to contribute, please install pre-commit before making commits in a pull request:
+
+```bash
+python -m pip install pre-commit
+pre-commit install
+```
+
+## Citing
+
+If you use the WAY dataset in your research, please cite the following [paper](https://arxiv.org/abs/2011.08277):
+
+```
+@inproceedings{hahn2020you,
+  title={Where Are You? Localization from Embodied Dialog},
+  author={Hahn, Meera and Krantz, Jacob and Batra, Dhruv and Parikh, Devi and Rehg, James and Lee, Stefan and Anderson, Peter},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages={806--822},
+  year={2020}
+}
