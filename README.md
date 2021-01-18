@@ -75,7 +75,7 @@ Results from LingUNet with geodesic distance and snap to scene graph:
 
 
 ### LingUNet-Skip Model
-|Model |  |Val-Seen | | |
+|Model | Val-Seen |-|-|-|
 | |LE|0m|5m|10m|
 |--------------------|--------------|--------------|--------------|----------------|
 | LingUNet-Skip         |  0.0           |  0.0             | 0.0   |             |
