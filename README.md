@@ -75,11 +75,11 @@ Results from LingUNet with geodesic distance and snap to scene graph:
 
 
 ### LingUNet-Skip Model
-|Model | | |Val-Seen | | | Val-Unseen | Test |
-| |LE|0m|5m| 10m| LE|0m|5m| 10m | LE|0m|5m| 10m |
-|--------------------|--------------|----------------|-----------------|
-| LingUNet-Skip         |  0.0           |  0.0             | 0.0   |
-| Human Locator         |  0.0           |  0.0              | 0.0    |                                                                                                            
+|Model |  |Val-Seen | | |
+| |LE|0m|5m|10m|
+|--------------------|--------------|--------------|--------------|----------------|
+| LingUNet-Skip         |  0.0           |  0.0             | 0.0   |             |
+| Human Locator         |  0.0           |  0.0              | 0.0    |                      |                                                                                               
 
 
 
