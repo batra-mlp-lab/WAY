@@ -56,13 +56,33 @@ unzip way_splits.zip
 rm way_splits.zip
 ```
 
-### Download Pretrained Models
-We provide a trained lingUnet-skip model described in the paper which you can download here
+###  Pretrained Models
+We provide a trained lingUnet-skip model described in the paper for the LED task. These models are hosted on Google Drive and can be downloaded as such:
 
-## Usage
+```bash
+python -m pip install gdown
+
+# LingUNet-Skip (141MB)
+gdown https://drive.google.com/uc?id=199hhL9M0yiurB3Hb_-DrpMRxWP1lSGX3
+```
+### Predictions
+* In the paper we show accuracy on the LED task as defined by euclidean distance. Instead now we recommend using geodesic distance to calcuate Localization Error since this will be easier to evaluate across different different map representations. We have added code to snap our pixel prediction to a node in the scene graph and then calcuate the geodesic distance to the true location using the scene graph. We now evaluate accuracy at 0m, 5m, 10m and geodesic localization error.
+
+* When submitting results to the evaluation server the format will:
+`annotation_id, mesh_xyz_coor, viewpoint`
+
+Results from LingUNet with geodesic distance and snap to scene graph:
+
 
 ### LingUNet-Skip Model
+| Model - Val Seen Split           | LE | Acc@0m | Acc@5m                                                                                                                                                                                   |
+|--------------------|--------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| LingUNet-Skip            | 0.24         | 0.18           | 0.0                                                                                                                     |
+| Human Locator         | 0.21         | 0.15           | 0.0                                                                                                                  |
 
+
+
+#### Usage
 The `lingUnet/run.py` script is how training and evaluation is done for all model configurations.
 
 For testing use `lingUnet/run_scripts/eval.sh` 
@@ -73,6 +93,9 @@ Before running these scripts you will need to change the `BASEDIR`, `SAVEDIR`, `
 Additionally use these files to change the parameters of the model which are set to default values in `lingUnet/cfg.py`
 
 #### Evaluation
+For evalutation you can run
+`./lingUnet/run_scripts/eval.sh`
+The model which to run will have to be set in the eval.sh file and as well as the `BASEDIR`, `SAVEDIR`, `DATADIR` paths. The file will evaluate the val splits and 
 
 
 #### Ablation Parameters
