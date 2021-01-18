@@ -72,9 +72,6 @@ gdown https://drive.google.com/uc?id=199hhL9M0yiurB3Hb_-DrpMRxWP1lSGX3
 `annotation_id, mesh_xyz_coor, viewpoint`
 
 Results from LingUNet with geodesic distance and snap to scene graph:
-
-
-### LingUNet-Skip Model
 * val-seen 
 
 |Model |LE|0m|5m|10m|
@@ -96,6 +93,7 @@ Results from LingUNet with geodesic distance and snap to scene graph:
 | LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
 | Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |  
 
+### LingUNet-Skip Model
 
 #### Usage
 The `lingUnet/run.py` script is how training and evaluation is done for all model configurations.
@@ -112,18 +110,20 @@ For evalutation you can run
 `./lingUnet/run_scripts/eval.sh`
 The model which to run will have to be set in the eval.sh file and as well as the `BASEDIR`, `SAVEDIR`, `DATADIR` paths. The file will evaluate the val splits and 
 
+In the paper we ran the model with euclidean distance to obtain these results please change the paramater `distance_metric` to "euclidean". We now suggest running with geodesic distance to obtain these results please change the paramater `distance_metric` to "geodesic". Please see above for explanation of this chance and the results interms of geodesic distance.
 
 #### Ablation Parameters
-Ablations Experiments and Parameters for Running the Model
-* Language Changes
-Argument language_change
+In order to run the ablations experiments presented in the paper or other parameters for running the model you can change the arguments in `/lingUnet/run_scripts/{}.sh` or in `/lingUnet/run_scripts/cfg.py`
+
+
+* To make Language Changes change the parameter `language_change`
 Options:
-shuffle
+`shuffle
 locator_only
 observer_only
 first_half
 second_half
-none 
+none `
  
 * Removing Inputs 
 blind_lang
