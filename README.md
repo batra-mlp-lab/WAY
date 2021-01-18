@@ -98,12 +98,8 @@ All the rest should be easy to find and change in the cfg.py file
 
 ### Baseline Models
 We presented 4 non-learning baselines in the paper, random pixel, random viewpoint, center pixel and a heuristic sliding window approach
-
-To run the heuristic sliding window approach go into `Baselines` run
-`python run_sliding_window.py`
-
-To run random and center baselines go into `Baselines` run
-`python paper_baselines.py`
+* To run the heuristic sliding window approach go into `Baselines` run `python run_sliding_window.py`
+* To run random and center baselines go into `Baselines` run `python paper_baselines.py`
 
 ## Contributing
 
