@@ -31,29 +31,35 @@ You will need to download the WAY dataset described [here (https://meerahahn.git
 
 | Dataset | Extract path | Size |
 |-------------- |---------------------------- |------- |
-| [way_splits.zip](https://drive.google.com/file/d/1bMvfiiCetHNlPsVQq9M5lZlcz3K9cU2J/view) | `data/way_splits/` | 2 MB |
-| [floorplans.zip](https://drive.google.com/file/d/1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h/view) | `data/floorplans/` | 103 MB |
+| [way_splits.zip](https://drive.google.com/file/d/1N5EfnNRFMf0TCqVYh_h1uUGc6mh8EVu9/view) | `data/way_splits/` | 2 MB |
 | [word_embeddings.zip](https://drive.google.com/file/d/1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh/view) | `data/word_embeddings/` | 13 MB |
+| [floorplans.zip](https://drive.google.com/file/d/1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h/view) | `data/floorplans/` | 103 MB |
+| [connectivity.zip](https://drive.google.com/file/d/1LQ__PGY1KSNjfmGK_YqZezkSwqtdYu9c/view) | `data/connectivity/` | 1 MB |
 
 Downloading the dataset:
 ```bash
 python -m pip install gdown
 cd data
 
-# Word Embddings
+# WAY Splits
+gdown 'https://drive.google.com/uc?id=1N5EfnNRFMf0TCqVYh_h1uUGc6mh8EVu9'
+unzip way_splits.zip
+rm way_splits.zip
+
+# Word Embeddings
 gdown 'https://drive.google.com/uc?id=1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh'
 unzip word_embeddings.zip
 rm word_embeddings.zip
 
 # Floorplans
-gdown 'https://drive.google.com/uc?id=1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h'
+gdown 'https://drive.google.com/uc?id=1Y9Gd1LSP2LethbGpRNdmb4S8kFIvax3M'
 unzip floorplans.zip
 rm floorplans.zip
 
-# Floorplans
-gdown 'https://drive.google.com/uc?id=1bMvfiiCetHNlPsVQq9M5lZlcz3K9cU2J'
-unzip way_splits.zip
-rm way_splits.zip
+# Graph Connectivity
+gdown 'https://drive.google.com/uc?id=1LQ__PGY1KSNjfmGK_YqZezkSwqtdYu9c'
+unzip connectivity.zip
+rm connectivity.zip
 ```
 
 ###  Pretrained Models
@@ -62,8 +68,8 @@ We provide a trained lingUnet-skip model described in the paper for the LED task
 ```bash
 python -m pip install gdown
 
-# LingUNet-Skip (141MB)
-gdown https://drive.google.com/uc?id=199hhL9M0yiurB3Hb_-DrpMRxWP1lSGX3
+# LingUNet-Skip (65MB)
+gdown https://drive.google.com/uc?id=1VxqGJg76ZH6WnMQ98uQ4SuhA2wS3PUw-
 ```
 ### Predictions
 * In the paper we show accuracy on the LED task as defined by euclidean distance. Instead now we recommend using geodesic distance to calcuate Localization Error since this will be easier to evaluate across different different map representations. We have added code to snap our pixel prediction to a node in the scene graph and then calcuate the geodesic distance to the true location using the scene graph. We now evaluate accuracy at 0m, 5m, 10m and geodesic localization error.
@@ -108,9 +114,10 @@ Additionally use these files to change the parameters of the model which are set
 #### Evaluation
 For evalutation you can run
 `./lingUnet/run_scripts/eval.sh`
-The model which to run will have to be set in the eval.sh file and as well as the `BASEDIR`, `SAVEDIR`, `DATADIR` paths. The file will evaluate the val splits and 
 
-In the paper we ran the model with euclidean distance to obtain these results please change the paramater `distance_metric` to "euclidean". We now suggest running with geodesic distance to obtain these results please change the paramater `distance_metric` to "geodesic". Please see above for explanation of this chance and the results interms of geodesic distance.
+The model which to run will have to be set in the eval.sh file and as well as the `BASEDIR`, `SAVEDIR`, `DATADIR` paths. The file will evaluate the val splits and create a file of predictions for the test set.
+
+In the paper we ran the model with euclidean distance to obtain these results please change the paramater `distance_metric` to "euclidean". We now suggest running with geodesic distance to obtain these results please change the paramater `distance_metric` to "geodesic". Please see above for explanation of this chance and the results in terms of geodesic distance.
 
 #### Ablation Parameters
 In order to run the ablations experiments presented in the paper or other parameters for running the model you can change the arguments in `/lingUnet/run_scripts/{}.sh` or in `/lingUnet/run_scripts/cfg.py`
