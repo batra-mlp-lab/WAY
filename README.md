@@ -23,6 +23,12 @@ Clone this repository and install the rest of the dependencies:
 git clone https://github.com/batra-mlp-lab/WAY.git
 cd WAY
 python -m pip install -r requirements.txt
+python nltk_requirements.py
+
+mkdir data/logs
+mkdir data/logs/tensorboard
+mkdir data/logs
+mkdir lingUnet/vis
 ```
 
 
@@ -70,11 +76,11 @@ python -m pip install gdown
 cd data
 
 # LingUNet-Skip (65MB)
-gdown 'https://drive.google.com/file/d/1WTHyDEpn-4wRnvGkXCm_g7bm5_gBB8oQ'
+gdown 'https://drive.google.com/uc?id=1WTHyDEpn-4wRnvGkXCm_g7bm5_gBB8oQ'
 ```
 
 ### Predictions
-* In the paper we show accuracy on the LED task as defined by euclidean distance. Instead now we recommend using geodesic distance to calcuate Localization Error since this will be easier to evaluate across different different map representations. We have added code to snap our pixel prediction to a node in the scene graph and then calcuate the geodesic distance to the true location using the scene graph. We now evaluate accuracy at 0m, 5m, 10m and geodesic localization error.
+* In the paper we show accuracy on the LED task as defined by euclidean distance to obtain these results just run the eval.sh script with the default parameters and the provided model. For future analysis we are now recommending using geodesic distance to calculate Localization Error. We believe this will allow better comparison across different different map representations during evaluation. We have added code to snap our pixel prediction to a node in the scene graph and then calculate the geodesic distance to the true location using the scene graph. We now evaluate accuracy at 0m, 5m, 10m and geodesic localization error. We can see the 0m accuracy is up and 5m accuracy is down which is to be expected.
 
 * When submitting results to the evaluation server the format will:
 `annotation_id, mesh_xyz_coor, viewpoint`
@@ -84,22 +90,15 @@ Results from LingUNet with geodesic distance and snap to scene graph:
 
 |Model |LE|0m|5m|10m|
 |------|--|--|--|---|
-| LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
-| Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |    
+| LingUNet-Skip        | 7.62+-0.6 | 0.23+-0.024	| 0.567+-0.028 | 0.76+-0.024 |
+| Random Node*         | 14.73+-0.65 | 0.02+-0.008 |	0.193+-0.023 | 0.397+-0.028|
 
 * val-unseen 
 
 |Model |LE|0m|5m|10m|
 |------|--|--|--|---|
-| LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
-| Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |  
-
-* test
-
-|Model |LE|0m|5m|10m|
-|------|--|--|--|---|
-| LingUNet-Skip         | 0.0 | 0.0 | 0.0 | 0.0 |
-| Human Locator         | 0.0 | 0.0 | 0.0 | 0.0 |  
+| LingUNet-Skip         | 9.9+-0.39 | 0.092+-0.012 | 0.375+-0.02 | 0.655+-0.02 |
+| Random Node*          | 10.53 +-0.41 | 0.057+-0.01 | 0.358+-0.02 | 0.606+-0.02 |
 
 ### LingUNet-Skip Model
 
@@ -109,7 +108,7 @@ The `lingUnet/run.py` script is how training and evaluation is done for all mode
 For testing use `lingUnet/run_scripts/eval.sh` 
 For training use `lingUnet/run_scripts/base.sh`  
 
-Before running these scripts you will need to change the `BASEDIR`, `SAVEDIR`, `DATADIR` paths in both of the scripts.
+Before running these scripts you will need to change the `BASEDIR` path to the location of this repo.
 
 Additionally use these files to change the parameters of the model which are set to default values in `lingUnet/cfg.py`
 
@@ -117,9 +116,9 @@ Additionally use these files to change the parameters of the model which are set
 For evalutation you can run
 `./lingUnet/run_scripts/eval.sh`
 
-The model which to run will have to be set in the eval.sh file and as well as the `BASEDIR`, `SAVEDIR`, `DATADIR` paths. The file will evaluate the val splits and create a file of predictions for the test set.
+The model which to run will have to be set in the eval.sh file and as well as change the `BASEDIR` path to the location of this repo. The file will evaluate the val splits and create a file of predictions for the test set.
 
-In the paper we ran the model with euclidean distance to obtain these results please change the paramater `distance_metric` to "euclidean". We now suggest running with geodesic distance to obtain these results please change the paramater `distance_metric` to "geodesic". Please see above for explanation of this chance and the results in terms of geodesic distance.
+In the paper we show accuracy on the LED task as defined by euclidean distance to obtain these results just run the eval.sh script with the default parameters and the provided model. Note the parameter `distance_metric` needs to be set to "euclidean". We now suggest running with geodesic distance to obtain these results please change the parameter `distance_metric` to "geodesic". Please see above for explanation of this chance and the results in terms of geodesic distance.
 
 #### Ablation Parameters
 In order to run the ablations experiments presented in the paper or other parameters for running the model you can change the arguments in `/lingUnet/run_scripts/{}.sh` or in `/lingUnet/run_scripts/cfg.py`

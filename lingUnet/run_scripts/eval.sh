@@ -12,4 +12,4 @@ python -W ignore ${BASEDIR}lingUnet/run_lingunet.py \
     --generate_predictions \
     --batch_size 32 \
     --distance_metric euclidean \
-    --predictions_dir ${BASEDIR}data/logs/base_lingunet/ \
+    --predictions_dir ${BASEDIR}data/logs/ \

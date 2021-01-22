@@ -48,18 +48,17 @@ def baseline(args, loader, mode="random"):
     scan_graphs["valSeen"] = loader.datasets["valSeen"].scan_graphs
     scan_graphs["valUnseen"] = loader.datasets["valUnseen"].scan_graphs
 
-    if mode == "waypoints":
-        allScans_Node2pix = json.load(open(args.image_dir + "allScans_Node2pix.json"))
-        waypoints = {}
-        for k, v in allScans_Node2pix.items():
-            waypoints[k] = [v[i] for i in v]
-        px_downSampleH = 700
-        px_downSampleW = 1200
+    allScans_Node2pix = json.load(open(args.image_dir + "allScans_Node2pix.json"))
+    waypoints = {}
+    for k, v in allScans_Node2pix.items():
+        waypoints[k] = [v[i] for i in v]
+    px_downSampleH = 700
+    px_downSampleW = 1200
 
     distances = {"valUnseen": [], "valSeen": []}
     for i in range(5 if mode == "random" else 1):
         for name, split_iterator in zip(
-            ["valUnseen", "valSeen"],
+            ["valSeen", "valUnseen"],
             [valSeen_iterator, valUnseen_iterator],
         ):
             for (
@@ -110,7 +109,7 @@ def baseline(args, loader, mode="random"):
                     distances[name].extend(
                         geo_dist_singlefloor(
                             allScans_Node2pix,
-                            scan_graphs[mode],
+                            scan_graphs[name],
                             preds,
                             batch_conversions,
                             info_elem,
