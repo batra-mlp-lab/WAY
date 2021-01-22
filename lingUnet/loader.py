@@ -8,6 +8,7 @@ from nltk.tokenize import word_tokenize
 import numpy as np
 import copy
 import random
+import re
 
 from led_dataset import LEDDataset
 
@@ -136,6 +137,7 @@ class Loader:
         ids = []
         seq_lengths = []
         for text in texts:
+            text = re.sub(r"\.\.+", ". ", text)
             line_ids = []
             words = word_tokenize(text.lower())
             self.max_length = max(self.max_length, len(words))
@@ -153,6 +155,7 @@ class Loader:
         ids = []
         seq_lengths = []
         for text in texts:
+            text = re.sub(r"\.\.+", ". ", text)
             line_ids = []
             words = word_tokenize(text.lower())
             self.max_length = max(self.max_length, len(words))
@@ -281,7 +284,7 @@ class Loader:
         print("[{}]: Building vocab from text data...".format(mode))
         texts = copy.deepcopy(dialogs)
         if args.embedding_type == "glove" or args.embedding_type == "word2vec":
-            texts, seq_lengths = self.build_pretrained_vocab(texts, args.embedding_dir)
+            texts, seq_lengths = self.build_pretrained_vocab(texts)
         else:
             texts, seq_lengths = self.build_vocab(texts, mode)
 

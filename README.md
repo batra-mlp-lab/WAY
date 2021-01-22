@@ -20,7 +20,7 @@ This project is developed with Python 3.6 and PyTorch
 Clone this repository and install the rest of the dependencies:
 
 ```bash
-git clone git@github.com:batra-mlp-lab/WAY.git
+git clone https://github.com/batra-mlp-lab/WAY.git
 cd WAY
 python -m pip install -r requirements.txt
 ```
@@ -31,9 +31,9 @@ You will need to download the WAY dataset described [here (https://meerahahn.git
 
 | Dataset | Extract path | Size |
 |-------------- |---------------------------- |------- |
-| [way_splits.zip](https://drive.google.com/file/d/1N5EfnNRFMf0TCqVYh_h1uUGc6mh8EVu9/view) | `data/way_splits/` | 2 MB |
-| [word_embeddings.zip](https://drive.google.com/file/d/1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh/view) | `data/word_embeddings/` | 13 MB |
-| [floorplans.zip](https://drive.google.com/file/d/1ocl14mlMQ4uOXTpII-gvrW7iThFdAX1h/view) | `data/floorplans/` | 103 MB |
+| [way_splits.zip](https://drive.google.com/file/d/1eyDtELKb0nxYcihlXd6T78dZZ6sBKhcH/view) | `data/way_splits/` | 2 MB |
+| [word_embeddings.zip](https://drive.google.com/file/d/1gC6Y4jqFOFkKFLSiqkt_ZGU4MM0vYIW7/view) | `data/word_embeddings/` | 13 MB |
+| [floorplans.zip](https://drive.google.com/file/d/1_JHaTxty1cnZHnBKUWcNIgAPyCFx0nR7/view) | `data/floorplans/` | 103 MB |
 | [connectivity.zip](https://drive.google.com/file/d/1LQ__PGY1KSNjfmGK_YqZezkSwqtdYu9c/view) | `data/connectivity/` | 1 MB |
 
 Downloading the dataset:
@@ -42,17 +42,17 @@ python -m pip install gdown
 cd data
 
 # WAY Splits
-gdown 'https://drive.google.com/uc?id=1N5EfnNRFMf0TCqVYh_h1uUGc6mh8EVu9'
+gdown 'https://drive.google.com/uc?id=1eyDtELKb0nxYcihlXd6T78dZZ6sBKhcH'
 unzip way_splits.zip
 rm way_splits.zip
 
 # Word Embeddings
-gdown 'https://drive.google.com/uc?id=1Ne2vs2M4UJ3P4-bccYD1vHvLHXwrmMUh'
+gdown 'https://drive.google.com/uc?id=1gC6Y4jqFOFkKFLSiqkt_ZGU4MM0vYIW7'
 unzip word_embeddings.zip
 rm word_embeddings.zip
 
 # Floorplans
-gdown 'https://drive.google.com/uc?id=1Y9Gd1LSP2LethbGpRNdmb4S8kFIvax3M'
+gdown 'https://drive.google.com/uc?id=1_JHaTxty1cnZHnBKUWcNIgAPyCFx0nR7'
 unzip floorplans.zip
 rm floorplans.zip
 
@@ -67,10 +67,12 @@ We provide a trained lingUnet-skip model described in the paper for the LED task
 
 ```bash
 python -m pip install gdown
+cd data
 
 # LingUNet-Skip (65MB)
-gdown https://drive.google.com/uc?id=1VxqGJg76ZH6WnMQ98uQ4SuhA2wS3PUw-
+gdown 'https://drive.google.com/file/d/1WTHyDEpn-4wRnvGkXCm_g7bm5_gBB8oQ'
 ```
+
 ### Predictions
 * In the paper we show accuracy on the LED task as defined by euclidean distance. Instead now we recommend using geodesic distance to calcuate Localization Error since this will be easier to evaluate across different different map representations. We have added code to snap our pixel prediction to a node in the scene graph and then calcuate the geodesic distance to the true location using the scene graph. We now evaluate accuracy at 0m, 5m, 10m and geodesic localization error.
 

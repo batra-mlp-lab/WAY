@@ -10,3 +10,4 @@ DateTime
 nltk
 matplotlib
 networkx
+tensorboard
