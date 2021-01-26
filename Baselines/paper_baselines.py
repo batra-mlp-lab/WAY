@@ -14,8 +14,8 @@ from utils import (
     accuracy,
     add_epsilon,
     euclidean_dist_singlefloor,
-    geo_dist_singlefloor,
 )
+from graph import get_geo_dist
 
 
 def load():
@@ -48,14 +48,9 @@ def baseline(args, loader, mode="random"):
     scan_graphs["valSeen"] = loader.datasets["valSeen"].scan_graphs
     scan_graphs["valUnseen"] = loader.datasets["valUnseen"].scan_graphs
 
-    allScans_Node2pix = json.load(open(args.image_dir + "allScans_Node2pix.json"))
-    waypoints = {}
-    for k, v in allScans_Node2pix.items():
-        waypoints[k] = [v[i] for i in v]
-    px_downSampleH = 700
-    px_downSampleW = 1200
+    waypoints = json.load(open(args.image_dir + "allScans_Node2pix.json"))
 
-    distances = {"valUnseen": [], "valSeen": []}
+    distances = {"valSeen": [], "valUnseen": []}
     for i in range(5 if mode == "random" else 1):
         for name, split_iterator in zip(
             ["valSeen", "valUnseen"],
@@ -83,6 +78,7 @@ def baseline(args, loader, mode="random"):
                 batch_locations = batch_locations.squeeze(1)
 
                 preds = torch.zeros(*batch_locations.size())
+                preds_way = []
                 for i in range(bs):
                     if mode == "random":
                         preds[
@@ -94,28 +90,24 @@ def baseline(args, loader, mode="random"):
                         preds[i, int(preds.size(1) / 2), int(preds.size(2) / 2)] = 1.0
                     elif mode == "waypoints":
                         candidates = [
-                            wp[0]
-                            for wp in waypoints[scan_names[i]]
-                            if int(wp[2]) == int(levels[i])
+                            wp
+                            for wp, v in waypoints[scan_names[i]].items()
+                            if int(v[2]) == int(levels[i])
+                            and wp in scan_graphs[name][scan_names[i]].nodes()
                         ]
                         choice = candidates[np.random.randint(len(candidates))]
-                        choice[0] = int(args.ds_width * choice[0] / px_downSampleW)
-                        choice[1] = int(args.ds_height * choice[1] / px_downSampleH)
-
-                        preds[i, choice[1], choice[0]] = 1.0
+                        preds_way.append(choice)
 
                 batch_locations = add_epsilon(batch_locations)
-                if args.distance_metric == "geodesic":
+                if mode == "waypoints":  # geodesic
                     distances[name].extend(
                         geo_dist_singlefloor(
-                            allScans_Node2pix,
                             scan_graphs[name],
-                            preds,
-                            batch_conversions,
+                            preds_way,
                             info_elem,
                         )
                     )
-                elif args.distance_metric == "euclidean":
+                else:  # euclidean
                     distances[name].extend(
                         euclidean_dist_singlefloor(
                             preds, batch_locations, batch_conversions, H, W
@@ -128,7 +120,7 @@ def baseline(args, loader, mode="random"):
         print(f"\tSE: {round(np.std(dists) / np.sqrt(len(dists)), 2)}")
         print(f"\tSD: {round(np.std(dists), 2)}")
 
-        for threshold in [1.0, 3.0, 5.0, 10.0]:
+        for threshold in [0.0, 3.0, 5.0, 10.0]:
             print(
                 f"\t{threshold}m-Acc: {round(accuracy(torch.tensor(dists), threshold=threshold), 3)}"
             )
@@ -137,12 +129,22 @@ def baseline(args, loader, mode="random"):
         print()
 
 
+def geo_dist_singlefloor(scan_graphs, preds, info_elem):
+    """Calculate distances between model predictions and targets within a batch."""
+    _, _, scan_names, _, true_viewpoints = info_elem
+    distances = []
+    for pred_viewpoint, sn, tv in zip(preds, scan_names, true_viewpoints):
+        G = scan_graphs[sn]
+        distances.append(get_geo_dist(G, pred_viewpoint, tv))
+    return distances
+
+
 if __name__ == "__main__":
     args = cfg.parse_args()
     loader = load()
-    print("testing random")
-    baseline(args, loader, mode="random")
-    print("testing center")
-    baseline(args, loader, mode="center")
-    print("testing waypoint")
+    print("testing waypoint - geodesic distance")
     baseline(args, loader, mode="waypoints")
+    print("testing random - euclidean")
+    baseline(args, loader, mode="random")
+    print("testing center - euclidean")
+    baseline(args, loader, mode="center")
