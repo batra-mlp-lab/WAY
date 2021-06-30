@@ -48,7 +48,7 @@ python -m pip install gdown
 cd data
 
 # WAY Splits
-gdown 'https://drive.google.com/uc?id=1eyDtELKb0nxYcihlXd6T78dZZ6sBKhcH'
+gdown 'https://drive.google.com/uc?id=1l0qkyRjOM1VmiXYvtjPrMN9NyHgh3OXh'
 unzip way_splits.zip
 rm way_splits.zip
 
