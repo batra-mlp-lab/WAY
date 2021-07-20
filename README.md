@@ -37,7 +37,7 @@ You will need to download the WAY dataset described [here (https://meerahahn.git
 
 | Dataset | Extract path | Size |
 |-------------- |---------------------------- |------- |
-| [way_splits.zip](https://drive.google.com/file/d/1l0qkyRjOM1VmiXYvtjPrMN9NyHgh3OXh/view) | `data/way_splits/` | 2 MB |
+| [way_splits.zip](https://drive.google.com/file/d/19env7HjYpgimenS8CJA_1iqoCi_kVDux/view) | `data/way_splits/` | 2 MB |
 | [word_embeddings.zip](https://drive.google.com/file/d/1gC6Y4jqFOFkKFLSiqkt_ZGU4MM0vYIW7/view) | `data/word_embeddings/` | 13 MB |
 | [floorplans.zip](https://drive.google.com/file/d/1_JHaTxty1cnZHnBKUWcNIgAPyCFx0nR7/view) | `data/floorplans/` | 103 MB |
 | [connectivity.zip](https://drive.google.com/file/d/1LQ__PGY1KSNjfmGK_YqZezkSwqtdYu9c/view) | `data/connectivity/` | 1 MB |
@@ -48,7 +48,7 @@ python -m pip install gdown
 cd data
 
 # WAY Splits
-gdown 'https://drive.google.com/uc?id=1l0qkyRjOM1VmiXYvtjPrMN9NyHgh3OXh'
+gdown 'https://drive.google.com/uc?id=19env7HjYpgimenS8CJA_1iqoCi_kVDux'
 unzip way_splits.zip
 rm way_splits.zip
 
